@@ -25,19 +25,25 @@ startCounter.addEventListener('click' , function (e) {
     loadingMessage.style.display = 'block';
     successMessage.style.display = 'none';
 
-
+    let originalSecond = secondsValue;
+    let lastPercent = 'p100'
     let timeriId = setInterval(() => {
-
-        if ( secondsValue<= 1 ) {
+        if(lastPercent) timerCircle.classList.remove(lastPercent);
+        if ( secondsValue<= 0 ) {
             clearInterval(timeriId)
             startBox.style.display = 'block';
             timerCircle.style.display = 'none';
             loadingMessage.style.display = 'none';
             successMessage.style.display = 'block';
-            inputCounter.value = ''
+            inputCounter.value = '';
+            return;
         }
 
+
         secondsValue  -= 1;
+        let percent = Math.abs(Math.floor( ((originalSecond - secondsValue)/originalSecond) * 100) - 100 )
+        lastPercent = `p${percent}`;
+        timerCircle.classList.add(`p${percent}`)
         timerNum.textContent = secondsValue;
         },1000);
 })
