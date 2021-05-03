@@ -50,7 +50,7 @@ let toggleErrorMessage = ({show, message}) => {
         errorElement.textContent = message;
         errorElement.classList.add('active');
     } else {
-        errorElement.classList.remove('active');
+        errorElement.style.display = 'none';
     }
 }
 
